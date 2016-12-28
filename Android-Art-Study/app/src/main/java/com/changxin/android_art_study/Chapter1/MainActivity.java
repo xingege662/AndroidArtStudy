@@ -39,12 +39,14 @@ public class MainActivity extends Activity {
                 // mIntent.addCategory("com.changxin.art.study.c");
                 mIntent.setData(Uri.parse("http://abc"));
                 PackageManager pm = getPackageManager();
-                //判断，如果这个值 为null，说明上面的匹配信息没有成功
+                //判断，如果这个值 为null，说明上面的匹配信息没有成功,用这个判断来避免错误
                 ComponentName componentName = mIntent.resolveActivity(pm);
 
                 //这个方法用来获取所有符合匹配信息的Acitivity
                 List<ResolveInfo> resolveInfos = pm.queryIntentActivities(mIntent, PackageManager.MATCH_DEFAULT_ONLY);
                 Log.d(TAG, "resolveInfos: " + resolveInfos.size());
+
+                pm.getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
 
                 for (ResolveInfo re : resolveInfos) {
                     Log.d(TAG, "onClick: " + re.activityInfo);
