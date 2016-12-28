@@ -19,3 +19,21 @@
         3.sharedPreferences的可靠性下降（同时读写会出现问题）
         4.application会重复创建多次（每个进程开启的时候会为每个进程分配一个虚拟机，所以就相同于一个应用启动，
         application就会启动）
+
+
+     虽然说不能直接共享内存，但是通过跨进程通信我们还是能够实现数据交互，实现跨进程的方式很多,比如：
+        1.通过Intent来传递数据
+        2.共享文件和sharedPreference
+        3.基于Binder的Messenger,和aidl和Socket
+
+
+     Serializable和Parcelble：
+        1.Serializable：serialVersionUID，用来辅助序列化和反序列化的过程，只有serialVersionUID相同时，序列化
+        和反序列化才能成功，一般我们去手动指定一个默认值1L。这样不管改变与否都能反序列话成功。
+        2.Parcelbel：也是一个接口，只要实现这个接口，一个类的对象就可以实现序列化并且可以通过Intent和Binder传递
+
+
+
+
+
+
