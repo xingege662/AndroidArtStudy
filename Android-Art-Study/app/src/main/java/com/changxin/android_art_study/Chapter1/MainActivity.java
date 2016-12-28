@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mIntent = new Intent(MainActivity.this, SecondActivity.class);
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 /**
                  * Activity的启动过程：Activity---->startActivity(Intent intent)----->startActivity(Intent intent, @Nullable Bundle options)
                  * ------------->startActivityForResult(@RequiresPermission Intent intent, int requestCode,
@@ -40,6 +41,9 @@ public class MainActivity extends Activity {
 
                  真正处理在ActivityThread中： handleLaunchActivity(ActivityClientRecord r, Intent customIntent, String reason) ----------》
                  performLaunchActivity(ActivityClientRecord r, Intent customIntent)
+                 */
+                /**
+                 * 如果一个Acitivity  A启动另一个Acitivity B 那么B会被压到A的任务栈中
                  */
                 startActivity(mIntent);
             }

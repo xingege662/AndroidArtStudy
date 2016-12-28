@@ -9,11 +9,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--当Acitivity的配置变化的时候就会被重建，这里可以通过configChanges来配置消除一些配置变化时Acitivty的重建-->
+        <!--当allowTaskReparenting属性和taskAffinity属性一起用的时候，这种情况比较复杂，会产生特殊的效果，当一个应用A
+        启动另一个应用B的一个Activity的时候，allowTaskReparenting为true时，再次启动B时，这个Acitivity会从A的任务栈
+        转移到B的任务栈中-->
         <activity
             android:name=".Chapter1.MainActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:launchMode="singleTop"
-            android:configChanges="orientation">
+            android:configChanges="orientation"
+            android:allowTaskReparenting="true"
+            android:taskAffinity="com.voole.com">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

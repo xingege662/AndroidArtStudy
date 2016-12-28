@@ -1,0 +1,5 @@
+IntentFilter:
+      Acitivity启动方式分为两种，隐式启动和显示启动，两者同时存在的时候用优先显示调用。
+      隐式调用需要Intent能够匹配目标组件的IntentFilter中所设置的过滤信息，如果不匹配则不能启动。
+      IntentFilter中的过滤信息有action，category，data。
+        action:一个过滤规则中可以有多个action，那么只要Intent中的action个能够和过滤规则中的任何一个action相同即可匹配成功。
