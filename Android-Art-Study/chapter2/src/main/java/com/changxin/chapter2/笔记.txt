@@ -31,7 +31,11 @@
         1.Serializable：serialVersionUID，用来辅助序列化和反序列化的过程，只有serialVersionUID相同时，序列化
         和反序列化才能成功，一般我们去手动指定一个默认值1L。这样不管改变与否都能反序列话成功。
         2.Parcelbel：也是一个接口，只要实现这个接口，一个类的对象就可以实现序列化并且可以通过Intent和Binder传递
+        系统已经为我们提供了许多可以序列化的类，可以直接序列化，intent，bundle，和Bitmap
 
+     Binder:
+        Binder是Android中一种跨进程通讯的方式，Binder还可以理解为一种虚拟的物理设备，他的设备驱动是/dev/Binder
+        从framework层来讲，Binder是ServiceManager连接各种Manager和ManagerService的渠道
 
 
 
