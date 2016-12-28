@@ -25,7 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Chapter1.SecondActivity"></activity>
+        <activity android:name=".Chapter1.SecondActivity">
+            <intent-filter>
+                <action android:name="com.changxin.art.study.a" />
+                <action android:name="com.changxin.art.study.b" />
+                <category android:name="com.changxin.art.study.c"/>
+                <category android:name="com.changxin.art.study.d"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http"
+                      />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

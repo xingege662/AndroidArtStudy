@@ -3,3 +3,11 @@ IntentFilter:
       隐式调用需要Intent能够匹配目标组件的IntentFilter中所设置的过滤信息，如果不匹配则不能启动。
       IntentFilter中的过滤信息有action，category，data。
         action:一个过滤规则中可以有多个action，那么只要Intent中的action个能够和过滤规则中的任何一个action相同即可匹配成功。
+        当只设置action为过滤条件的时候，需要设置默认的categorty，不然会报错。
+         <category android:name="android.intent.category.DEFAULT" />
+
+        category：测试失败，只有默认的能用
+
+        data：data由两部分组成，mineType和Uri。没有action和category，只设置data也是可以跳转的。
+        setData()和setType()不能同时调用，因为源码中显示只要调用其中的一个方法，另一个就会被清空，
+        如果想都设置的话，使用setDataAndType()方法。
