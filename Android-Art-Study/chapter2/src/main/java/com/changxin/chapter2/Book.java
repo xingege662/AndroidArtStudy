@@ -1,4 +1,4 @@
-package com.changxin.chapter2.model;
+package com.changxin.chapter2;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -10,7 +10,7 @@ import android.os.Parcelable;
 public class Book implements Parcelable {
     private int bookId;
     private String bookName;
-    public Book(int bookId,String bookName){
+    public Book(int bookId, String bookName){
         this.bookId = bookId;
         this.bookName = bookName;
     }

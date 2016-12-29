@@ -37,6 +37,15 @@
         Binder是Android中一种跨进程通讯的方式，Binder还可以理解为一种虚拟的物理设备，他的设备驱动是/dev/Binder
         从framework层来讲，Binder是ServiceManager连接各种Manager和ManagerService的渠道
 
+        所有通过binder传输的接口都要继承自IInterface接口
+
+        当客户端和服务端处于同一个进程时，方法调用不会走跨进程的transact过程，而当两者处于不同进程时，方法调用需要走
+        transact过程，这个过程由stub的内部代理类proxy来完成。
+
+        Binder两个很重要的方法，linkToDeath和unLinkToDeath。Binder运行在服务端进程，如果服务端进程由于某种原因
+        终止，会导致我们的的远程调用失败，更为关键的是，如果我们不知道Binder已经断裂，那么客户端的功能就会收到影响。
+        为了解决这个问题，Binder中提供了两个配对的方法，linkToDeath和unlinkToDeath
+
 
 
 

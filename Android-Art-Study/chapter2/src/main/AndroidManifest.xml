@@ -19,7 +19,8 @@
         <activity android:name=".SecondActivity"
                   android:process=":remote"/>
         <activity android:name=".ThirdActivity"
-                  android:process="com.changxin.art"></activity>
+                  android:process="com.changxin.art"/>
+        <service android:name=".Service.MyService" />
     </application>
 
 </manifest>

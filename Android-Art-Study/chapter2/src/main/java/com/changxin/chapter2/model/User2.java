@@ -3,6 +3,9 @@ package com.changxin.chapter2.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.changxin.chapter2.Book;
+
+
 /**
  * Created by changxin on 2016/12/28.
  */
@@ -35,7 +38,7 @@ public class User2 implements Parcelable {
     public static final Creator<User2> CREATOR = new Creator<User2>() {
         @Override
         public User2 createFromParcel(Parcel in) {
-            return new User2(in);
+           return new User2(in);
         }
 
         @Override
