@@ -17,6 +17,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         String processName = MyUtils.getProcessName(getApplicationContext(), Process.myPid());
-        Log.d(TAG, "onCreate:processName "+processName);
+        if(getApplicationInfo().packageName.equals(processName)) {
+
+            Log.d(TAG, "onCreate:processName " + processName+"      "+getApplicationInfo().packageName);
+        }
     }
 }
