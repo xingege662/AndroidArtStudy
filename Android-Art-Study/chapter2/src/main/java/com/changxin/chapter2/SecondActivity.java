@@ -58,6 +58,7 @@ public class SecondActivity extends AppCompatActivity {
 //                startActivity(mIntent);
 
                 mIntent = new Intent(SecondActivity.this, MyService.class);
+
                 bindService(mIntent, serviceConnection, Context.BIND_AUTO_CREATE);
             }
         });

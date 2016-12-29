@@ -17,7 +17,10 @@ public class MainActivity extends AppCompatActivity {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIntent = new Intent(MainActivity.this, SecondActivity.class);
+                mIntent = new Intent(MainActivity.this, ThirdActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("hello","常鑫");
+                mIntent.putExtra("name", mBundle);
                 startActivity(mIntent);
             }
         });
