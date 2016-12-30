@@ -71,8 +71,33 @@
         在Messenger中传递必须将数据放入Message中，而Messenger和Message对象都实现了Parcelable接口，因此可以跨进程
         传输，简单来说，Message中支持的简单数据类型就是Messenger支持的传输类型。通过messenger来传输message，Message中
         能使用的载体有what，arg1，arg2，bundle以及replyTo，message中的object在同一个进程中很使用，但在跨进程通信
-        的时候不好用，
+        的时候不好用。
 
+
+        AIDL:
+        Messenger是以串行的方式处理客户端发来的消息，如果大量的消息同时发送到服务器，服务端仍然只能一个一个的处理，
+        如果有大量的并发请求，那么用Messenger就太不合适了。同时，Messenger的作用主要是为了消息传递，很多时候我们
+        可能要跨进程调用服务端的方法，这种情形就要用到AIDL。
+
+        AIDL支持的数据类型：
+        1.基本数据类型（int，long,char,boolean,double）
+        2.String 和 Charsequence
+        3.List ：只支持ArrayList，里面的每个元素都要被AIDL支持
+        4.Map:只支持hashMap，里面的每个元素都要被支持，包括key和value
+        5.Parcelable:实现parcelable的对象
+        6.AIDL
+
+        如果AIDL中用到了自定义的Parcelble对象，那么必须新建一个和他同名的AIDL文件，并在其中声明他为parcelable
+        类型，
+
+
+        CopyOnWriteArrayList,这个类支持并发读写，AIDL方法是在服务端的Binder线程池中运行的，因此当多个客户端同时
+        连接的时候，会存在多个客户端同时访问的情形，所以我们要在AIDL方法中处理线程同步。用CopyOnWriteArrayList
+        来自动支持线程同步。
+        前面提到，AIDL中能使用的List只是ArrayList，但是我们这里却使用了CopyOnWirteArrayList(注意他不继承ArrayList)，
+        为什么能正常工作呢？这是因为AIDL中所支持的是抽象的List，而List只是一个接口，因此服务端返回的是CopyOnWriteArrayList，
+        但是Binder会按照List的规范去访问数据并最终形成一个新的ArrayList传递给客户端。所以是可以的，和次类似的还有
+        ConcurrentHashMap。
 
 
 
