@@ -100,4 +100,6 @@
         ConcurrentHashMap。
 
 
+        AIDL接口不能调用普通的接口。
+
 

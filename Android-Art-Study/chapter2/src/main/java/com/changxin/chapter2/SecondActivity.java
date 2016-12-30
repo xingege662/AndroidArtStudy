@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,15 +26,30 @@ public class SecondActivity extends AppCompatActivity {
     private Intent mIntent;
     private IBookManager iBookManager;
     private List<Book> books = new ArrayList<Book>();
+    private final int  MESSAGE_ARRIVED = 1;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGE_ARRIVED:
+                    Log.d(TAG, "handleMessage: "+msg.obj);
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    };
+
     ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             iBookManager = IBookManager.Stub.asInterface(service);
             try {
-                books = iBookManager.getBook();
-                Log.d(TAG, "onServiceConnected: "+books.toString());
                 Book book = new Book(3, "算法");
                 iBookManager.addBook(book);
+                books = iBookManager.getBook();
+                Log.d(TAG, "onServiceConnected: "+books.toString());
+                iBookManager.registerListener(iOnNewBookArrivedListener);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -43,6 +60,7 @@ public class SecondActivity extends AppCompatActivity {
 
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,5 +80,28 @@ public class SecondActivity extends AppCompatActivity {
                 bindService(mIntent, serviceConnection, Context.BIND_AUTO_CREATE);
             }
         });
+    }
+
+    private IOnNewBookArrivedListener iOnNewBookArrivedListener = new IOnNewBookArrivedListener.Stub(){
+
+        @Override
+        public void onNewBookArrived(Book newBook) throws RemoteException {
+            mHandler.obtainMessage(MESSAGE_ARRIVED,newBook).sendToTarget();
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+
+        if(iBookManager!=null && iBookManager.asBinder().isBinderAlive()){
+            try {
+                Log.d(TAG, "onDestroy: unregisterLister");
+                iBookManager.unregisterListener(iOnNewBookArrivedListener);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        unbindService(serviceConnection);
+        super.onDestroy();
     }
 }
