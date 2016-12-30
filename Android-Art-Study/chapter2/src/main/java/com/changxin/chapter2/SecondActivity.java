@@ -32,7 +32,13 @@ public class SecondActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_ARRIVED:
-                    Log.d(TAG, "handleMessage: "+msg.obj);
+                    try {
+                     int a  = iBookManager.getBook().size();
+                        Log.d(TAG, "handleMessage: "+msg.obj+"books size is :" + a);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+
                     break;
                 default:
                     super.handleMessage(msg);

@@ -70,11 +70,12 @@ public class MyService extends Service {
 
         @Override
         public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
+
             if (listeners.contains(listener)) {
                 listeners.remove(listener);
                 Log.d(TAG, "unregisterListener:remove sucessed");
             }else{
-                Log.d(TAG, "unregisterListener: already remove");
+                Log.d(TAG, "unregisterListener: can not remove");
             }
             Log.d(TAG, "unregisterListener: "+listeners.size());
         }

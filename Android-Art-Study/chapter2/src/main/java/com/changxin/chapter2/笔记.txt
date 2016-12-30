@@ -102,4 +102,9 @@
 
         AIDL接口不能调用普通的接口。
 
+        怎么做才能实现解注册功能？用RemoteCallBackList
+
+        RemoteCallBackList是系统专门提供的用于删除跨进程listener对象的接口，RemoteCallBackList是一个泛型，支持管理
+        任意的AIDL接口，
+
 
