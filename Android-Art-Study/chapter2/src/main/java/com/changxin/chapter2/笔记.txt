@@ -46,6 +46,10 @@
         终止，会导致我们的的远程调用失败，更为关键的是，如果我们不知道Binder已经断裂，那么客户端的功能就会收到影响。
         为了解决这个问题，Binder中提供了两个配对的方法，linkToDeath和unlinkToDeath
 
+        所有的非基本参数都需要一个定向tag来指出数据流通的方式，不管是 in , out , 还是 inout
+        AIDL中的定向 tag 表示了在跨进程通信中数据的流向，其中 in 表示数据只能由客户端流向服务端， out 表示数据只能由服务端流向客户端，
+        而 inout 则表示数据可在服务端与客户端之间双向流通
+
         四大组件中的三大组件（Activity,Service,Receiver），都是支持在Intent中传递bundle数据的，由于Bundle传递了
         Parcelable接口，所以他可以方便的在不同进程间传输，我们就可以在Bundle中附加我们需要传输给远端进程的信息，并
         通过intent发送出去，但是传输的信息必须是可以序列化，并且序列化过的。
@@ -56,6 +60,18 @@
         Messenger对aidl进行了封装，使得很容易实现进程间通信，同时，由于他一次处理一个请求，因此在服务端我们不用考虑线程
         同步的问题，这是因为服务端不存在并发执行的情形
 
+        Messenger的使用方式：
+        1.服务端：首先，我们要先在服务端创建一个Service来处理客户端的请求，同时创建一个handler来并通过他来创建一个
+        Messenger对象，然后在Service的onBind中返回Messenger对象底层的binder即可。
+        2.客户端：客户端进程中，首先要绑定服务端的Service，绑定成功后用服务端返回IBinder对象创建一个Messenger,
+        通过这个Messenger就可以向服务端发送消息了，发送消息类型为Message对象。如果需要服务端回应客户端，就和服务端
+        一样，我们还需要创建一个handler并创建一个Messenger对象，并把这个Messenger对象通过Message的replyTo()
+        参数传递给服务端，服务端就可以通过这个replyTo参数就可以回应客户端。
+
+        在Messenger中传递必须将数据放入Message中，而Messenger和Message对象都实现了Parcelable接口，因此可以跨进程
+        传输，简单来说，Message中支持的简单数据类型就是Messenger支持的传输类型。通过messenger来传输message，Message中
+        能使用的载体有what，arg1，arg2，bundle以及replyTo，message中的object在同一个进程中很使用，但在跨进程通信
+        的时候不好用，
 
 
 
