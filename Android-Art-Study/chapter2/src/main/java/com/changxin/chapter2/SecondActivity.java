@@ -120,7 +120,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         if(iBookManager!=null && iBookManager.asBinder().isBinderAlive()){
-            try {
+                try {
 
                 iBookManager.unregisterListener(iOnNewBookArrivedListener);
                 Log.d(TAG, "onDestroy: unregisterLister and books size is "+books.size());

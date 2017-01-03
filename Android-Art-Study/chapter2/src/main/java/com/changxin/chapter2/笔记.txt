@@ -125,7 +125,18 @@
         2.在onServiceDisconnected中重连远程服务。
         区别：onServiceDisconnected在UI线程中执行，binderDied在binder线程中执行。也就是在binderDied中不能访问UI线程。
 
+        ContentProvider:
+        创建一个自定义的ContentProvider只需继承自ContentProvider，然后实现6个抽象方法即可：onCreate(),
+        query(),update(),insert(),delete()，getType(),这6个方法均运行在contentProvider的进程中，但是除了
+        onCreate()由系统会掉并运行在主线程里，其他5个方法均由外界回调运行在binder线程池里。
 
+        ContentProvider主要以表格的数据来组织数据，并且可以包含多个表，行往往对应一个记录，列代表一个字段，这点和
+        数据库比较类似。除了表格的形式，ContentProvider还支持文件，图片和视频等。
+
+        虽然ContentProvider的底层数据看起来像一个SQLite数据库，但是ContentProvider对底层的数据存储没有任何要求，
+        可以是SQLite数据库，也可以使用普通文件，甚至可以用内存中的一个对象来进行数据储存。
+
+        android:authorities是ContentProvider的唯一标识，通过这个属性外部应用就可以访问我们的BookProvider。
 
 
 
