@@ -49,6 +49,11 @@ public class SecondActivity extends AppCompatActivity {
     ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            try {
+                iBookManager.asBinder().linkToDeath(deathRecipient,0);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             iBookManager = IBookManager.Stub.asInterface(service);
             try {
                 Book book = new Book(3, "算法");
@@ -63,7 +68,22 @@ public class SecondActivity extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            mIntent = new Intent(SecondActivity.this, MyService.class);
+            bindService(mIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+        }
+    };
 
+    IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            Log.d(TAG, "binder died. tname:" + Thread.currentThread().getName());
+            if (iBookManager == null)
+                return;
+            iBookManager.asBinder().unlinkToDeath(deathRecipient, 0);
+            iBookManager = null;
+            //这里重新绑定service
+            mIntent = new Intent(SecondActivity.this, MyService.class);
+            bindService(mIntent, serviceConnection, Context.BIND_AUTO_CREATE);
         }
     };
 
@@ -101,8 +121,9 @@ public class SecondActivity extends AppCompatActivity {
 
         if(iBookManager!=null && iBookManager.asBinder().isBinderAlive()){
             try {
-                Log.d(TAG, "onDestroy: unregisterLister");
+
                 iBookManager.unregisterListener(iOnNewBookArrivedListener);
+                Log.d(TAG, "onDestroy: unregisterLister and books size is "+books.size());
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

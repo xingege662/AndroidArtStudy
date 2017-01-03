@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.changxin.chapter2">
 
+
+    <permission android:name="com.cx.aidl.chapter2"
+                android:protectionLevel="normal"/>
+    <uses-permission android:name="com.cx.aidl.chapter2"/>
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
