@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.changxin.chapter2">
 
+    <permission
+        android:name="com.cx.aidl.chapter2"
+        android:protectionLevel="normal" />
 
-    <permission android:name="com.cx.aidl.chapter2"
-                android:protectionLevel="normal"/>
-    <uses-permission android:name="com.cx.aidl.chapter2"/>
-
+    <uses-permission android:name="com.cx.aidl.chapter2" />
+    <uses-permission android:name="com.cx.book"/>
 
     <application
         android:name=".MyApplication"
@@ -16,11 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SecondActivity"
@@ -34,7 +31,24 @@
             android:name=".Messenger.MessengerService"
             android:process=":real" />
 
-        <activity android:name=".Messenger.MessengerActivity"></activity>
+        <activity android:name=".Messenger.MessengerActivity" />
+
+        <activity
+            android:name=".provider.ContentPorviderActivity"
+            android:label="@string/title_activity_content_porvider"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:authorities="com.cx.bookContentProvider"
+            android:name=".provider.BookProvider"
+            android:process=":remoteprovider"
+            android:permission="com.cx.book"/>
     </application>
 
 </manifest>

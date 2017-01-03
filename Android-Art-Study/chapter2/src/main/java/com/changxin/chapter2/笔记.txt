@@ -138,5 +138,9 @@
 
         android:authorities是ContentProvider的唯一标识，通过这个属性外部应用就可以访问我们的BookProvider。
 
+        增删改查4个方法是存在多线程并发访问的，因此方法内部要做好线程同步。
+        SQLiteDatabase对数据库的操作是同步处理的，但是如果通过多个SQLiteDatabase操作数据库就无法保证线程同步，因为
+        不同对象之间无法进行线程同步
+
 
 
