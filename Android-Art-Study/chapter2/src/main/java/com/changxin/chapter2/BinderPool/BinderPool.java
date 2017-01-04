@@ -21,6 +21,8 @@ public class BinderPool {
     public static final int binderPoolAddCode = 0;
     public static final int binderPoolEncreIml = 1;
     private Context mContext;
+
+
     private IBinderPool mIBinderPool;
     private static volatile BinderPool mInstance;
     private CountDownLatch mCountDownLatch;
