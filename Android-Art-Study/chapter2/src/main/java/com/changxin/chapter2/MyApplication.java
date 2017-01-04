@@ -16,10 +16,12 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        String processName = MyUtils.getProcessName(getApplicationContext(), Process.myPid());
-        if(getApplicationInfo().packageName.equals(processName)) {
 
-            Log.d(TAG, "onCreate:processName " + processName+"      "+getApplicationInfo().packageName);
-        }
+        String processName = MyUtils.getProcessName(getApplicationContext(), Process.myPid());
+        Log.d(TAG, "onCreate:processName " + processName+"      "+getApplicationInfo().packageName);
+
+//        if(getApplicationInfo().packageName.equals(processName)) {
+//
+//        }
     }
 }
