@@ -32,6 +32,7 @@ public class BookProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         Log.d(TAG, "onCreate: "+"Thread Name" + Thread.currentThread().getName());
+        getContext().getContentResolver().notifyChange(uri,null);
         return null;
     }
 
