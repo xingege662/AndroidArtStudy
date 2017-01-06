@@ -52,6 +52,12 @@ View的事件体系
 
          3.Scroller
 
+         4.scrollTo和scrollBy
+
+            View内部的两个属性mScrollX和mScrollY这个两个属性分别能通过getScrollX（），和getScrollY()来分别获得，
+            在滑动过程中，mScrollX的值总是等于View左边缘和View内容左边缘在水平方向的距离，mScrollY也是，ScrollTo
+            和scrollBy只能改变View在布局中的位置
+
 
 
 
