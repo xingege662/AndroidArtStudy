@@ -1,0 +1,42 @@
+View的事件体系
+
+    left,top,right,bottom这些坐标都是相对于view的父容器来说的
+    view：width = right - left
+          height = bottom - top
+
+    android3.0开始,View增加了额外的几个参数：x,y,translationX,traslationY,这几个参数也是相对于父容器的坐标，
+    并且translationX,translationY的默认值是0。
+           x = left + translationX
+           y = top + translationY
+    在view平移过程中，top和left表示的是原始左上角的信息位置，其值并不会发生改变，此时改变的是x,y,translationX,
+    translationY;
+
+
+
+    MotionEvent和TouchSlop
+        MotionEvent：
+            ACTION_DOWN:手指刚接触屏幕
+            ACTION_MOVE:手指在屏幕上移动
+            ACTION_UP:是指在屏幕上离开的那一瞬间
+
+            点击屏幕后离开，松开：DOWN------>UP
+            点击屏幕滑动一段时间后再松开：DOWN---->MOVE---->........MOVE---------->Up
+
+            通过MotionEvent对象我们可以得到点击事件发生的x,y坐标。为此，系统提供了两组方法：getX/getY,getRawX/getRawY。
+            他们的区别其实很简单，getX/getY返回的是相对于当前View左上角的x和y坐标，而getRawX和getRawY返回的是相对于
+            手机屏幕左上角的x和y坐标。
+
+        TouchSlop：
+            TouchSlop是系统所能识别出的被认为是滑动的最小距离，换句话说，当手指在屏幕上滑动时，如果两次滑动之间的距离小于
+            这个值，那么系统就认为没有滑动。ViewConfiguration.get(getContext().getScaledTouchSlop());
+
+
+    VelocityTracker,GestureDetector和Scroller
+
+         1.VelocityTracker：
+            速度追踪，用于追踪手指在滑动过程中的的速度，包括水平方向和竖直方向的速度。他的使用过程很简单，首先，在view的
+            onTouchEvent方法中追踪当前点击事件的速度：
+            
+
+
+
