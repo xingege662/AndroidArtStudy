@@ -62,6 +62,7 @@ View的事件体系
          Scroller的工作原理：Scroller本身不能实现view的的滑动，它需要配合View的computeScroll方法才能完成弹性滑动的
          效果，它不断地让View重绘，每一次重绘据滑动起始时间会有一个时间间隔，通过这个时间间隔Scroller就可以得出View
          当前的滑动位置，知道了滑动位置就可以通过scrollTo方法来完成View滑动。
+         
 
 
 
