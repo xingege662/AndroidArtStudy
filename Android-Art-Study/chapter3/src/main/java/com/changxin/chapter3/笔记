@@ -36,7 +36,23 @@ View的事件体系
          1.VelocityTracker：
             速度追踪，用于追踪手指在滑动过程中的的速度，包括水平方向和竖直方向的速度。他的使用过程很简单，首先，在view的
             onTouchEvent方法中追踪当前点击事件的速度：
-            
+                VelocityTracker velocityTracker = VelocityTracker.obtain();
+                volecityTracker.addMovement(event);
+
+                velocityTracker.computeCurrentVelocity(1000);//在获取速度之前一定要先调用这个方法。
+                int xVelocity = volecityTracker.getXVolecity();
+                int yVelocity = volecityTracker.getYVolecity();
+
+            最后不需要使用它的的时候：
+                velocityTracker.clear();
+                velocityTracker.recycle();
+
+         2.GestureDetector
+            用于辅助检测用户的单击，滑动，长按，双击等行为。
+
+         3.Scroller
+
+
 
 
 
