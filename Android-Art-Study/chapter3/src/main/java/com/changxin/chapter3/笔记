@@ -72,6 +72,8 @@ View的事件体系
 
           ViewGroup默认不拦截任何事件
           View没有拦截事件的方法，一旦一个View被点击就会调用onTouchEvent方法。
+          View的onTouchEvent默认就会消耗事件(返回true)，除非他是不可点击的，View的longCliable默认都为false，clickable属性
+          分情况，button为true,textView为false。
 
 
 
