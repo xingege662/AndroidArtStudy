@@ -1,0 +1,16 @@
+
+
+      自定义View的三大流程：
+            1.测量流程
+            2.布局流程
+            3.绘制流程
+
+
+       ViewRoot对应于ViewRootImpl类，它是连接它是连接windowManager和DecorView的纽带，View的3大流程均是通过
+       ViewRoot来完成的。
+
+       View的绘制流程从performTraversales方法开始的
+
+
+
+        NessureSpec代表一个32位的值，前2位代表mode，后30位代表size
