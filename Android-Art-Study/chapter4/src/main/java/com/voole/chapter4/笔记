@@ -13,4 +13,4 @@
 
 
 
-        NessureSpec代表一个32位的值，前2位代表mode，后30位代表size
+       NessureSpec代表一个32位的值，前2位代表mode，后30位代表size
