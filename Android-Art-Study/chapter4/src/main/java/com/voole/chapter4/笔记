@@ -12,5 +12,4 @@
        View的绘制流程从performTraversales方法开始的
 
 
-
        NessureSpec代表一个32位的值，前2位代表mode，后30位代表size
