@@ -13,3 +13,54 @@
 
 
        NessureSpec代表一个32位的值，前2位代表mode，后30位代表size
+
+        View的onMessure过程：结论
+       直接继承自view的自定义控件需要重写onMessure方法并设置wrap_content时的自身的大小，否则在布局中使用wrap_content
+       就行相当于使用了matchParent
+
+       ViewGroup的onMessure过程：
+       对ViewGroup来说，除了完成自己的messure过程意外，还会遍历去调用所有子元素的measure方法，各个子元素再递归去执行这个
+       过程。和View不同的是，ViewGroup是一个抽象类，因此他没有重写View的onMeassure方法，但是他提供了一个叫messureChild
+       的方法.
+
+       实际上在onCreate,onStart,onResume中均无法正确得到某个View的宽高信息，这是因为View的messure过程和Activity的生命周期
+       方法不是同步执行的，因为此无法保证Activity执行了onCreate，onStart,onResume时某个View已经测量完毕了，如果？View还没有
+       测量完毕，那么获得的宽高就是0.
+
+       解决办法：
+            1.Activity、View onWindowFocusChanded
+              这个方法的含义是View已经初始化完毕了，宽高已经准备好了，这个时候获取宽高是没有问题的，但是onWindowFocusChanged会
+              被调用多次，当Activity继续执行和暂停执行时，onWindowFocusChanged均会被调用，如果频繁的电泳用onResume和onPause
+              那么也会频繁的被调用。
+            2.view.post(runnable)
+              通过post可以将一个runnable投递到消息队列的尾部，然后等待Looper调用次runnable的时候，View也已经被初始化好了。
+            3.ViewTreeObserver
+            4.view.messure(int widthMessureSpec,int heightMessureSpec)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
