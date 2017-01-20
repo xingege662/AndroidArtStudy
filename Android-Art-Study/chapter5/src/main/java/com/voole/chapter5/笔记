@@ -1,0 +1,9 @@
+RemoteView
+
+    RemoteView表示的是一种View的结构，它可以在其他进程中显示，由于他在其他进程中显示，为了能够更新它的界面，RemoteView
+    提供了一套基础的操作用于跨进程的更新界面。
+    RemoteView在Android中使用的场景有两种：通知栏和桌面小部件上的应用。
+
+
+    应用：
+        
