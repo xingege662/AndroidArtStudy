@@ -36,7 +36,16 @@
               通过post可以将一个runnable投递到消息队列的尾部，然后等待Looper调用次runnable的时候，View也已经被初始化好了。
             3.ViewTreeObserver
             4.view.messure(int widthMessureSpec,int heightMessureSpec)
-    
+
+
+        getWidth,getMessureWidth,getHeight,getMessuerHeight的区别
+
+            在默认情况下， View的测量宽高/View的最终宽高是相等的，只不过测量宽高行成于view的Messurea期，最终的形成与layout过程，
+            即两者形成的时机不同，在日常开发过程中，可以认为是一样的，但是特殊情况下会导致不一致，比如重写view的layout方法。
+            public void layout(l,t,r,b){
+                super.layout(l,t,r+100,b+100);
+            }
+
 
 
 
