@@ -46,6 +46,35 @@
                 super.layout(l,t,r+100,b+100);
             }
 
+        View的绘制过程遵循如下几步：
+            1.绘制背景background.draw(canvas)
+            2.绘制自己（onDraw）
+            3.绘制children（onDisPatchDraw）
+            4.绘制装饰(onDrawScrollBars)
+
+        自定义View的分类：
+
+            1.继承View重写onDraw方法
+                采用这种方式需要自己支持wrap_content,并且padding也需要自己处理
+            2.继承ViewGroup派生特殊的layout
+
+            3.继承特定的View
+
+            4.继承特定的ViewGroup
+
+        自定义View须知 ：
+            1.让View 支持wrap_content
+            2.如果有必要，让View支持padding属性
+                如果继承自View，如果不在onDraw方法中处理padding属性，那么padding属性是无法起作用的。另外，直接继承
+                自ViewGroup的控件需要在onMessure和onLayout中考虑padding和子元素的margin对其造成的影响，不然导致
+                padding和margin属性失效
+            3.尽量不要在View中使用handler
+                这是因为View内部本身就提供了post系列的方法，完全可以代替handler的作用，当然除非你很明显明确的要使
+                Handler来发消息
+            4.View中如果有动画或者线程，需要及时停止，参考View的onDetachFromWindow
+            5.View嵌套时，需要进行滑动处理
+
+
 
 
 
