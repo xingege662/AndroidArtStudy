@@ -10,3 +10,6 @@ Drawable
 
 
     分类：BitMapDrawable, ShapeDrawable,LayerDrawable,StateListDrawble.
+
+
+    通常情况下我们没必要去自定义drawable，因为自定义的drawable不能再xml文件中用。
