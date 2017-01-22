@@ -10,3 +10,12 @@ RemoteView
      典型事件是给remoteView添加单机事件，因为remoteView运行在远处的进程中，所以无法直接像view那样 通过setOnclickLisenter来
      添加单机事件，要想给remoteView添加单机事件，就要设置pendingIntent,pengdingIntent通过send和cancel方法来发送和取消
      待定的intent。
+
+        PendingIntent支持3中待定的意图，启动Activity，启动Service，启动广播。对应着有3个接口方法。getActivity(),
+        getService(),getBroadCast();
+
+     PengdingIntent的匹配规则为：如果两个PendingIntent的内部Intent和requestCode都相同，那么这两个PendingIntent就是
+     相同的。Intent的匹配规则是：如果两个Intent的ComponentName和Intent-filter都相同，那么这两个Intent也是相同的
+
+
+     
