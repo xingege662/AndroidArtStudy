@@ -1,0 +1,12 @@
+Drawable
+    Drawable表示的是一种可以在Canvas上进行绘制的抽象的概念，它的种类繁多，最常见的颜色和图片都可以是一个drawble，
+    Drawable在开发中有着自己的优点：首先，它使用简单，比自定义View的成本要低；其次非图片类型的Drawable占用空间小，
+    这对减少apk的大小有重要的帮助。
+
+
+    Drawable的内部宽高这两个参数比较重要，通过getIntrisicWidth和getIntrisicHeight这两个方法可以获取到他们。但是
+    并不是所有的drawable都有内部的宽高，比如一张图片生成的drawable，他的内部宽高就是图片的宽高，Drawable的内部宽/高，
+    不同于他的大小，一般来说，drawable是没有大小概念的，当用作View的背景时，Drawable会被拉伸至View的大小。、
+
+
+    分类：BitMapDrawable, ShapeDrawable,LayerDrawable,StateListDrawble.
