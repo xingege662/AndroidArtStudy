@@ -5,4 +5,8 @@ RemoteView
     RemoteView在Android中使用的场景有两种：通知栏和桌面小部件上的应用。
 
 
-    应用：
+    PendingIntent 和 Intent
+        PendingIntent和Intent的区别在于pengdingIntent在某个特定的时间点发生，而Intent是立即发生。PendingIntent的
+     典型事件是给remoteView添加单机事件，因为remoteView运行在远处的进程中，所以无法直接像view那样 通过setOnclickLisenter来
+     添加单机事件，要想给remoteView添加单机事件，就要设置pendingIntent,pengdingIntent通过send和cancel方法来发送和取消
+     待定的intent。
