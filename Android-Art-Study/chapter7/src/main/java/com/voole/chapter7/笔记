@@ -21,4 +21,3 @@ Android动画深入分析
                 这个方法，这个方法必须在startActivity或者finish()之后调用才会生效。
 
      属性动画：
-        
