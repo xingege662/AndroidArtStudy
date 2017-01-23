@@ -3,3 +3,22 @@ Android动画深入分析
     View动画，帧动画，属性动画
 
     1.View动画建议用xml方式来创建，因为xml的可读性更高
+
+    LayoutAnimation用于ViewGroup，为ViewGroup指定一个动画，这样他的没个子元素出场时都会具有这个动画效果。这种效果
+    常常作用于ListView上。不走
+
+        1.定义LayoutAnimation
+        2.为子元素指定具体的入场动画
+        3.为View指定android：layoutAnimation属性
+
+    Activity的切换效果：
+        Activity有默认的切换效果，但这个效果我们是可以自定义的，主要用到了overridePendingTransition(int enterAnim,int exitAnim),
+        这个方法，这个方法必须在startActivity或者finish()之后调用才会生效。
+        enterAnim——Activity被打开时需要的动画
+        exitAnim——Activity被暂停时所需要的动画
+
+     注意：overridePendingTransition(int enterAnim,int exitAnim),
+                这个方法，这个方法必须在startActivity或者finish()之后调用才会生效。
+
+     属性动画：
+        
