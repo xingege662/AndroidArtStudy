@@ -9,4 +9,5 @@
     独存在，它需要附着在特定的父window中，比如常见的dialog就是一个window。系统window是需要声明权限才能创建的
     window，比如toast。
 
-    
+    window是一个抽象的概念，每一个window都对应着一个View和ViewRootImpl，window和view通过ViewRootImpl建立
+    联系，因此window并不是实际存在的，它是以view存在的。
