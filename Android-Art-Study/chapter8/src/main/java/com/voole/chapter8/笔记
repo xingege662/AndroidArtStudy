@@ -1,0 +1,12 @@
+理解Window和WindowManager
+
+    Window是一个抽象类，它的具体实现是phoneWindow。创建一个Window是很简单事，只需通过windowManager来实现。
+    WindowManager是外界访问window的的入口，Window的具体是现实是WindowManagerService中，WindowManager和
+    WindowManagerService交互是一个IPC机制。Android中所有的视图都是通过window来呈现的，他们的视图实际上都是
+    附着在window上的，因此Window是View的直接管理者。
+
+    window有3中类型，分别为应用window，子window和系统window。应用window附着在一个Activity上，子window不能单
+    独存在，它需要附着在特定的父window中，比如常见的dialog就是一个window。系统window是需要声明权限才能创建的
+    window，比如toast。
+
+    
