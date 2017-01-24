@@ -1,5 +1,6 @@
 package com.voole.chapter7;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] data = {"abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd",
             "abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd",
             "abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd","abcd"};
+    private Button btnWrapper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,5 +33,26 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_view_anim,R.anim.anim_view_exit);
             }
         });
+        btnWrapper = (Button) findViewById(R.id.btn1);
+        btnWrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewWrapper wrapper = new ViewWrapper(btn);
+                ObjectAnimator.ofInt(wrapper,"width",500).setDuration(3000).start();
+            }
+        });
+    }
+    class ViewWrapper{
+        View object;
+        public ViewWrapper(View object){
+            this.object = object;
+        }
+        public int getWidth(){
+            return object.getLayoutParams().width;
+        }
+        public void setWidth(int width){
+            this.object.getLayoutParams().width = width;
+            object.requestLayout();
+        }
     }
 }
