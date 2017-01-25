@@ -11,3 +11,6 @@
 
     window是一个抽象的概念，每一个window都对应着一个View和ViewRootImpl，window和view通过ViewRootImpl建立
     联系，因此window并不是实际存在的，它是以view存在的。
+
+    View是Android中的视图呈现的方式，但是View不能单独存在， 它必须附着在window这个抽象的对象上，因此有视图的
+    地方就有window。
