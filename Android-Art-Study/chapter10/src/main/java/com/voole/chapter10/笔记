@@ -38,6 +38,16 @@ Android的消息机制
             Looper在android的消息机制中主要扮演着消息循环的角色，具体来说就是他会不停地从MessageQueue中查看是否
          有消息，如果有新消息就立即处理，否则一直阻塞在那里。
 
+            Handler的工作需要looper,没有looper的线程就会报错，那么如何为一个线程创建looper呢？其实很简单，通过
+          looper.prepare()即可为一个线程创建looper对象，接着通过looper.loop()来开启消息循环。
+          new　Thread(){
+            public void run(){
+                Looper.prepare();
+                Handler mHandler = new Handler();
+                Looper.loop();
+            }
+          }.start();
+
 
 
 
