@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this,SecondActivity.class);
                 startActivity(intent);
+
                 //设置动画效果
                 overridePendingTransition(R.anim.anim_view_anim,R.anim.anim_view_exit);
             }

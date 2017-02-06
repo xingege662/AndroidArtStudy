@@ -1,0 +1,15 @@
+四大组件的工作过程
+
+     Android中的四大组件除了BroadcastReceiver意外，其他三种组件都必须在Android-Manifest文件中注册，对于
+     BroadcastReceiver来说，它既可以在Manifest文件中注册，也可以在代码中注册。在调用方式上，除了ContentProvider，
+     都要使用intent进行传递。
+
+     startActivity
+     startActivity有好几种重载方式，但他们都会调用startActivityForResult（）方法。
+     最后通过ActivtyThread的performLaunchActivity()方法启动
+     这个方法主要做了如下几件事情：
+        1.从ActivityClientRecord中获取待启动的Acitivty的组件信息
+        2.通过Instrumentation的newAcitivity方法使用类加载器创建Acitivity对象
+        3.通过LoadedApk的makeApplication方法来尝试创建Application对象
+        4.创建ContextImpl对象并通过Acitivity的attach方法来完成一些重要数据的初始化
+        5.调用Acitivty的onCreate方法创建
