@@ -14,3 +14,7 @@
 
     View是Android中的视图呈现的方式，但是View不能单独存在， 它必须附着在window这个抽象的对象上，因此有视图的
     地方就有window。
+
+    普通的dialog有一个特殊之处，那就是必须采用Activity的Context，如果采用Application的Context，那么就会报错。
+    原因是没有token导致的，而应用token一般只有Activity拥有。
+
