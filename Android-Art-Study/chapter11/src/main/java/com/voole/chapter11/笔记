@@ -1,3 +1,8 @@
 Android中的线程和线程池
 
-      
+      AsyncTask底层用了线程池，IntentService和HandlerThread底层直接用的线程。
+
+      IntentService的作用很像一个后台线程，但是IntentService是一个服务，不容易被后台系统杀死， 如果是一个线程
+      不依附于四大组件的话很容易被杀死。
+
+      AsyncTask的版本不一样，效果不一样，如果在3.0以上想实现并行，需要调用executeOnExecutor。
