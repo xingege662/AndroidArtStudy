@@ -48,6 +48,25 @@ Android的消息机制
             }
           }.start();
 
+            Looper除了prepare方法外，还提供了prepareMainLooper方法，其本质也是根据prepare来实现的。由于主线程中
+          的Looper比较特殊，所以Looper还提供了一个getMainLooper方法，通过它可以在任何地方获取到主线程的Looper。
+          Looper也是可以退出的，Looper提供了quit和quitSafely来退出一个Looper，二者的区别是：quit会直接退出Looper，
+          而quitSafeLy只是设定一个退出标记，然后把消息队列中的已有消息处理完毕后才安全的退出。Looper退出后，通过
+          handler发送的消息会失败，这个时候handler的send方法会返回false。在子线程中，如果手动为其创建了Looper，
+          那么所有的事情完成以后应该调用quit方法来终止消息循环，否则这个子线程就一直会是等待状态，而如果退出Looper的
+          话，这个线程就会立即终止，因此建议不需要的时候终止looper
+
+
+          通过Callback可以采用如下方式来创建Handler对象：Handler handler = new Handler(callback).那么CallBack
+          的意义是：源码里说明：可以用来创建一个Handler的实例但并不需要派生Handler的子类。在日常开发中，创建Handler
+          最常见的方式就是派生一个handler的子类并重写handleMessage方法来处理具体的消息，而Callback提供了另一种
+          使用handler的方式，当我们不想派生自子类时，就可以通过callback来实现。
+
+          ActivityThread通过ApplicationThread和AMS进行进程间通信，AMS以进程通信的方式完成ActivityThread的请求
+          后会回调ApplicationThread中的Binder方法，然后ApplicationThread会向H发送消息，H收到消息后会将ApplicationThread
+          中的逻辑切换到AcitivityThrread中去执行，即切换到主线程重去执行。
+
+
 
 
 
