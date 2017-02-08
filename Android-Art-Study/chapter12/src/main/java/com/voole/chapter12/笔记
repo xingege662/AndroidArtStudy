@@ -1,0 +1,44 @@
+Bitmap的加载和Cache
+
+      缓存策略：目前比较常用的缓存策略就是LruCache和DiskLruCache，其中LruCache常被用做内存缓存，而DiskLruCache
+      常被用作存储缓存。
+      Lru的核心思想是：当缓存快满时，会淘汰近期最少使用的缓存目标。
+
+      如何加载一幅图片呢？BitmapFactory类提供了四类方法：decodeFile，decodeResource，decodeStream，和decodeByteArray。
+      分别用于支持从文件系统，资源，输入流，以及字节数组中加载一个Bitmap对象，其中decodeFile和decodeResource又
+      间接调用了decodeStream方法，这4个方法都是android底层实现的。
+
+      如何高效的加载Bitmap呢？采用BitmapFactory.Options来加载所需尺寸的图片。通过BitmapFactoty.Options就可以
+      按一定的采样率来加载缩小后的图片，将缩小后的图片在ImageView中显示，这样会降低内存占用从而在一定程度上避免OOM，
+      提高了bitmap在加载时的性能。上面的四个方法都支持BitmapFactory.Options参数。
+
+      通过BitmapFactory.options来缩放图片，主要用到了他的inSampleSize参数，即采样率。当inSampleSize为1时，采样
+      后的图片大小为图片的原始大小；当inSampleSize大于1时，比如2，那么采样后的图片其宽/高均为原图大小的1/2,而像素
+      为原来的1/4，
+
+      通过采样率即可有效的加载图片，计算采样率的步骤：
+        1.将BitmapFactory.Options的inJustDecodeBounds参数设置为true并加载图片。
+        2.从BitmapFacroty.Options中取出图片的原始宽高信息，他们对应于outWidth和outHeight参数
+        3.根据采样的规则并结合目标View的所需大小计算出采样率inSampleSize
+        4.将BitmapFactory.Options的inJustDecodeBound参数设置为false，然后从新加载图片。
+
+        inJustDecodeBounds设置为true时，BitmapFactor只会解析图片的原始宽/高信息，并不会真正的加载图片，这个操作是
+        轻量级的。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
