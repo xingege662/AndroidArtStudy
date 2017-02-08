@@ -26,6 +26,53 @@ Bitmap的加载和Cache
         轻量级的。
 
 
+      缓存：
+        1.当程序第一次从网络加载图片后，就将其缓存到存储设备上，这样下次使用这张图片就不用再从网络上获取了，这样就为
+        用户节省了流量。很多时候为了提高用户的体验，往往还会把图片在内存中缓存一份，这样当应用打算从网络上获取一张
+        图片时，程序首先先会在内存中寻找，然后磁盘，然后网络。
+
+        缓存策略一般包含添加，获取，删除。
+
+        目前常用的一个缓存算法是LRU，他的核心思想是当缓存满时，会优先淘汰那些近期最少使用的缓存对象。采用LRU算法
+        的缓存有两种：LruCache和DiskLruCache 。LruCache实现内存缓存，DiskLruCache实现硬盘缓存。
+
+      LruCache:
+        LruCache是一个泛型类，它内部采用一个LinkedHashMap以强引用的方式存储外界的缓存对象，其提供了get和put方法
+        来完成缓存的获取和添加操作，当缓存满时，LruCache会先移除比较早的缓存对象，然后再添加新的缓存对象。
+            强引用：直接的对象引用
+            软引用：当一个对象中只有软引用存在时，系统内存不足时此对象会被gc回收
+            弱引用：当一个对象中只有弱引用存在时，此对象会随时被gc回收
+
+
+      DiskLruCache:
+        DiskLruCache用于实现存储设备的缓存，即磁盘缓存,它通过将缓存对象写入文件系统从而实现缓存的效果。
+
+        缓存路径可以是SD卡上的缓存目录，具体是sdcard/Android/data/package_name/cache目录。当然也可以选择其他目录
+        建议:如果应用卸载后就希望删除缓存文件，那么就选择SD卡上的缓存文件，如果希望保留在设备上就缓存到SD卡的其他设备上。
+
+        DiskLruCache open(File directory, int appVersion, int valueCount, long maxSize)
+
+        appVersion是应用的版本号，一般设为1即可，当appVersion发生改变时DiskLruCache会清空所有的缓存文件。
+
+        valueCount表示的是单个节点所对应的数据个数，一般设为1即可。
+
+        maxSize表示的是缓存的总大小。
+
+        DiskLruCache缓存的添加：
+            DiskLruCache是通过Editor完成的，Editor表示一个缓存对象的编辑对象。以图片缓存举例，首先需要获取图片
+            url所对应的key，然后根据key就可以通过edit()来获取Editor对象，如果这个缓存正在被编辑，那么edit()返回
+            null，既DiskLruCache不允许同时编辑同一个缓存对象。之所以把url变成一个key，是因为图片的url中很可能存在
+            一些特殊的字符，会影响Url在Android中直接使用，一般采用md5值作为key。
+
+
+
+
+
+
+
+
+
+
 
 
 
