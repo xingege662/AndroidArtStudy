@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/chapter12" />
             <option value="$PROJECT_DIR$/chapter13" />
             <option value="$PROJECT_DIR$/chapter14" />
+            <option value="$PROJECT_DIR$/chapter15" />
             <option value="$PROJECT_DIR$/chapter2" />
             <option value="$PROJECT_DIR$/chapter3" />
             <option value="$PROJECT_DIR$/chapter4" />
@@ -23,6 +24,7 @@
             <option value="$PROJECT_DIR$/chapter7" />
             <option value="$PROJECT_DIR$/chapter8" />
             <option value="$PROJECT_DIR$/chapter9" />
+            <option value="$PROJECT_DIR$/lib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
