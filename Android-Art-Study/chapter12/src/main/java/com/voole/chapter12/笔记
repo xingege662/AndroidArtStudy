@@ -64,6 +64,17 @@ Bitmap的加载和Cache
             null，既DiskLruCache不允许同时编辑同一个缓存对象。之所以把url变成一个key，是因为图片的url中很可能存在
             一些特殊的字符，会影响Url在Android中直接使用，一般采用md5值作为key。
 
+            将Url变成key以后，就可以通过edit(key)来获取Editor对象，通过Editor获取到写出流，将文件写入磁盘文件，
+            再调用Editor的commit方法来实现。
+
+        DiskLruCache的缓存和查找
+            和缓存的添加过程类似，缓存查找过程也需要将url转换为key，然后通过DiskLruCache的get方法拿到一个SnapShot
+            对象，接着再通过SnapShot对象即可得到缓存文件的输入流。为了便面OOM的问题，要用BitampFactory.Options
+            来加载图片，但是那种方法对FileInputStream的缩放存在问题，原因是FileInputStream是一种有序的文件流，
+            而两次decodeStream调用影响了文件流的位置属性，导致了第二册decodeStream时得到的是null。为了解决这个问题，
+            可以通过文件流来得到它所对应的文件描述，然后通过BitmapFactory.decodeFileDescripter方法来加载一张
+            缩放后的图片。
+
 
 
 
