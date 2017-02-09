@@ -1,1 +1,12 @@
 Android 性能优化
+
+    1.布局优化
+    RelativeLayout比linearLayout和frameLayout布局过程要更消耗CPU,选择消耗小的ViewGroup
+    用<include>标签 <merge>标签 和ViewStub
+    ViewStub提供了按需加载的功能，当需要时才会将ViewStub中的布局加载到内存，这提高了程序的初始化效率。
+    2.绘制优化
+        1.onDraw中不要创建新的局部对象，这是因为onDraw方法可能会被频繁的调用，这样就会在一瞬间产生大量的临时对象，
+        这不仅暂用了过多的内存而且还会导致系统更加频繁的gc，降低了程序的使用效率。
+        2.onDraw方法中不要做耗时任务，也不能执行成千上万次的循环操作。
+    3.内存泄漏优化
+        
